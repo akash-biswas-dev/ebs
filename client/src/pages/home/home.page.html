@@ -1,0 +1,257 @@
+<!-- EBS Business Management System Homepage -->
+<div class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo/Brand -->
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <div class="w-10 h-10 gradient__bg rounded-lg flex items-center justify-center">
+              <a routerLink="/" class="text-white font-bold text-xl">E</a>
+            </div>
+            <a routerLink="/" class="ml-3 text-2xl font-bold text-gray-900">EBS</a>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-8 nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="space-x-4">
+          <app-button label="Sign in" variant="primary" (click)="onSignIn()"></app-button>
+          <app-button label="Sign up" variant="secondary" (click)="onSignUp()"></app-button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button type="button" class="text-gray-700 hover:text-blue-600 p-2">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Enterprise Business
+            <span class="gradient__text"> Solutions </span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Streamline your business operations with our comprehensive ERP system. Manage multiple
+            workspaces, dynamic roles, and branches all in one powerful platform.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <app-button label="Get Started"></app-button>
+            <app-button label="Watch Demo"></app-button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote / Mission Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <blockquote
+              class="text-3xl md:text-4xl font-light text-gray-800 italic leading-relaxed"
+            >
+              "Empowering businesses to thrive through intelligent automation, seamless
+              collaboration, and data-driven insights."
+            </blockquote>
+            <cite class="block mt-8 text-lg text-blue-600 font-semibold"
+              >— EBS Mission Statement</cite
+            >
+          </div>
+          <div class="flex justify-center">
+            <img
+              src="/illustration-1.png"
+              alt="Business Management Illustration"
+              class="w-full max-w-md h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <app-features-section></app-features-section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Customers Say</h2>
+          <p class="text-xl text-gray-600">Trusted by businesses worldwide</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-gray-50 p-8 rounded-xl">
+            <div class="flex items-center mb-6">
+              <img
+                src="https://via.placeholder.com/60x60/4F46E5/FFFFFF?text=JS"
+                alt="John Smith"
+                class="w-15 h-15 rounded-full mr-4"
+              />
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900">John Smith</h4>
+                <p class="text-gray-600">CEO, TechCorp</p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "EBS transformed our operations completely. The multi-workspace feature allowed us to
+              manage our 5 different departments seamlessly. Highly recommended!"
+            </p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-gray-50 p-8 rounded-xl">
+            <div class="flex items-center mb-6">
+              <img
+                src="https://via.placeholder.com/60x60/7C3AED/FFFFFF?text=MJ"
+                alt="Maria Johnson"
+                class="w-15 h-15 rounded-full mr-4"
+              />
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900">Maria Johnson</h4>
+                <p class="text-gray-600">Operations Manager, RetailPlus</p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "The inventory management and analytics features have saved us countless hours. Our
+              efficiency increased by 40% within the first quarter."
+            </p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-gray-50 p-8 rounded-xl">
+            <div class="flex items-center mb-6">
+              <img
+                src="https://via.placeholder.com/60x60/059669/FFFFFF?text=DW"
+                alt="David Wilson"
+                class="w-15 h-15 rounded-full mr-4"
+              />
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900">David Wilson</h4>
+                <p class="text-gray-600">Founder, StartupHub</p>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "As a growing startup, we needed flexibility and scalability. EBS provided exactly
+              that with its dynamic role management and branch control features."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-xl text-gray-600">Get answers to common questions about EBS</p>
+        </div>
+
+        <app-faq-section class="space-y-8"></app-faq-section>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Brand Column -->
+        <div class="md:col-span-2">
+          <div class="flex items-center mb-6">
+            <div
+              class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center"
+            >
+              <span class="text-white font-bold text-xl">E</span>
+            </div>
+            <span class="ml-3 text-2xl font-bold">EBS</span>
+          </div>
+          <p class="text-gray-300 mb-6 max-w-md">
+            Empowering businesses worldwide with intelligent ERP solutions. Streamline operations,
+            boost productivity, and drive growth with EBS.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
+            </li>
+            <li>
+              <a href="#features" class="text-gray-300 hover:text-white transition-colors"
+                >Features</a
+              >
+            </li>
+            <li>
+              <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
+            </li>
+            <li>
+              <a href="#contact" class="text-gray-300 hover:text-white transition-colors"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Support</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="#" class="text-gray-300 hover:text-white transition-colors">Documentation</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-300 hover:text-white transition-colors">Help Center</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-300 hover:text-white transition-colors"
+                >Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-300 hover:text-white transition-colors"
+                >Terms of Service</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+        <p class="text-gray-400">
+          &copy; 2025 EBS - Enterprise Business Solutions. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>

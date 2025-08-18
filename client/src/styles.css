@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+:root {
+  --primary: #4f39f6;
+  --primary-deep: #1447e6;
+  --secondary: #9810fa;
+  --text: #4a5565;
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-text: var(--text);
+}
+
+body {
+  @apply text-text;
+}
+
+.gradient__bg {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600;
+}
+
+.gradient__text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+}
+
+.btn {
+  @apply px-2 py-1 md:px-4 md:py-2 rounded-md font-semibold text-lg cursor-pointer;
+}
+
+.btn__primary {
+  @apply text-white bg-primary hover:bg-primary-deep;
+}
+
+.btn__secondary {
+  @apply border-2 border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600 transition-colors;
+}
+
+.btn__gradient {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200;
+}
+
+.nav-links a {
+  @apply hover:text-primary px-3 py-2 text-sm font-medium transition-colors;
+}
