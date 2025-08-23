@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cromxt</groupId>
-	<artifactId>ebs</artifactId>
+	<artifactId>server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ebs</name>
 	<description>An complete business management solution.</description>
