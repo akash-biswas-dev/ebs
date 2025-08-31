@@ -1,6 +1,5 @@
 import { Eye, EyeOff } from "lucide-react";
-import React, { ReactNode, useState } from "react";
-import Button from "./Button";
+import { ReactNode, useState } from "react";
 
 const Input = ({
   inputType = "text",
@@ -40,7 +39,6 @@ const Input = ({
           <>
             <input
               type={showPassword ? "text" : "password"}
-              id="password"
               name={label.toLowerCase().replaceAll(" ", "_")}
               value={value && value}
               onChange={(eve) => onChange && onChange(eve.target.value)}
@@ -63,8 +61,7 @@ const Input = ({
           <>
             <input
               type={inputType}
-              id="password"
-              name="password"
+              name={label.toLowerCase().replaceAll(" ", "_")}
               value={value && value}
               onChange={(eve) => onChange && onChange(eve.target.value)}
               className={`w-full px-3 py-2 pr-10 border rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${

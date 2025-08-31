@@ -11,7 +11,7 @@ const Button = ({
   rightIcon=<></>,
   onClick = () => {},
   type = "button",
-  href= '/',
+  href,
   children
 }: {
   variant?: ButtonVarient;

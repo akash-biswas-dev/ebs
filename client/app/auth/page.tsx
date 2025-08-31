@@ -1,43 +1,47 @@
 'use client';
 
-
-
 import React, { FormEvent, useState } from "react";
 import { Building2, Eye, EyeOff, Loader2 } from "lucide-react";
 import Input from '@/components/Input';
 import Button from "@/components/Button";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 
 const AuthPage = () => {
 
-  type ErrorType = {email:string|null, password:string|null};
+  const navigation = useRouter();
+
+
+  type ErrorType = {email:string|undefined, password:string|undefined};
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: ""
+    emailOrUsername: "",
+    password: "",
+    rememberMe: false
   });
 
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<ErrorType>({email:null, password:null});
+  const [errors, setErrors] = useState<ErrorType>({email:undefined,password:undefined});
 
   const onChangeEmail = (value:string)=>{
-    setFormData((prev)=>({...prev,email:value}))
+    setFormData((prev)=>({...prev,emailOrUsername:value}))
 
-    setErrors((prev)=>({...prev,email:null}))
+    setErrors((prev)=>({...prev,email:undefined}))
   }
 
   const onChangePassword = (value:string)=>{
     setFormData((prev) => ({ ...prev, password: value }));
 
-    setErrors((prev) => ({ ...prev, password: null }));
+    setErrors((prev) => ({ ...prev, password: undefined }));
   }
 
   const validateForm = () => {
-    const newErrors:ErrorType = {email:null,password:null};
+    const newErrors:ErrorType = {email:undefined,password:undefined};
 
-    if (!formData.email) {
+    if (!formData.emailOrUsername) {
       newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (formData.emailOrUsername.length < 5) {
       newErrors.email = "Email is invalid";
     }
 
@@ -50,24 +54,32 @@ const AuthPage = () => {
     return newErrors;
   };
 
-  const handleSubmit = async (e:FormEvent) => {
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("Submitted")
-
+    
     const newErrors = validateForm();
-
-    if (Object.keys(newErrors).length > 0) {
+    
+    if (newErrors.email || newErrors.password) {
       setErrors(newErrors);
       return;
     }
 
     setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      alert("Sign in successful!");
-    }, 2000);
+    try{
+      const res = await axios.post('/api/v1/auth', formData)
+      
+      const {status} = res;
+
+      if(status === 204){
+        setLoading(false);
+        navigation.push('/dashboard');
+      }
+    }catch(err){
+      console.log(err)
+      setLoading(false);    
+    }
+
   };
 
 
@@ -92,15 +104,21 @@ const AuthPage = () => {
         <form className="bg-white rounded-lg shadow-lg border border-slate-200 p-8" onSubmit={handleSubmit}>
           <div className="space-y-6">
             {/* Email Field */}
-            <Input label='Email or Username' placeHolder="abc@gmail.com" onChange={onChangeEmail}/>
+            <Input label='Email or Username' placeHolder="abc@gmail.com" onChange={onChangeEmail} errors={errors.email}/>
             {/* Password Field */}
-            <Input label='Password' inputType='password' placeHolder='&*@((@!*(&*(!*(' onChange={onChangePassword}/>
+            <Input label='Password' inputType='password' placeHolder='&*@((@!*(&*(!*(' onChange={onChangePassword} errors={errors.password}/>
 
           
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      rememberMe: e.target.checked,
+                    }))
+                  }
                   id="remember"
                   name="remember"
                   type="checkbox"
