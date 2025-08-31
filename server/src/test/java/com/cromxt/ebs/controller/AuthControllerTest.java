@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,8 +21,7 @@ import java.util.UUID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AuthController.class)
 @Import(SecurityConfig.class)
@@ -57,7 +57,7 @@ public class AuthControllerTest {
     @Test
     void shouldCreateTokens() throws Exception {
 
-        UserCredentialDTO userCredentialDTO = new UserCredentialDTO("username", "password");
+        UserCredentialDTO userCredentialDTO = new UserCredentialDTO("username", "password", true);
 
         String accessToken = UUID.randomUUID().toString();
         String refreshToken = UUID.randomUUID().toString();
@@ -73,6 +73,18 @@ public class AuthControllerTest {
                 )
                 .andExpect(status().isCreated())
                 .andExpect(content().string(objectMapper.writeValueAsString(authTokensDTO)));
+    }
+
+    @Test
+    void shouldGet404WhenGiveInvalidCredentials() throws Exception {
+        UserCredentialDTO userCredentials = new UserCredentialDTO("username", "password", true);
+
+        when(authService.login(userCredentials)).thenThrow(new BadCredentialsException("User with "+ userCredentials.emailOrUsername()+" not found"));
+
+        mockMvc.perform(post(BASE_URL).contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(userCredentials))
+        ).andExpect(status().isNotFound())
+                .andExpect(header().string("Message", "User with "+ userCredentials.emailOrUsername()+" not found"));
     }
 
 }

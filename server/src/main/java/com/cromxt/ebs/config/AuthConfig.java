@@ -35,7 +35,7 @@ public class AuthConfig {
 
     UserDetailsService userDetailsService = (usernameOrEmail) -> {
       Optional<UserModel> userOptional = userRepository.findByEmailOrUsername(usernameOrEmail, usernameOrEmail);
-      return userOptional.orElseThrow(() -> new UserNotFoundException("Username with"));
+      return userOptional.orElseThrow(() -> new UserNotFoundException(String.format("User with %s not found",usernameOrEmail)));
     };
     DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
     authenticationProvider.setPasswordEncoder(passwordEncoder);

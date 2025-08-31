@@ -8,7 +8,6 @@ import com.cromxt.ebs.services.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -52,7 +51,7 @@ public class UserServiceImpl implements AuthService, UserService {
 
     @Override
     public AuthTokensDTO login(UserCredentialDTO userCredentials) {
-        UsernamePasswordAuthenticationToken credentialToken = new UsernamePasswordAuthenticationToken(userCredentials.usernameOrEmail(), userCredentials.password());
+        UsernamePasswordAuthenticationToken credentialToken = new UsernamePasswordAuthenticationToken(userCredentials.emailOrUsername(), userCredentials.password());
 
         final Authentication authentication;
         try {
