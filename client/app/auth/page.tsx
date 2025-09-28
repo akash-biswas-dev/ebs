@@ -1,11 +1,11 @@
 'use client';
 
-import React, { FormEvent, useState } from "react";
-import { Building2, Eye, EyeOff, Loader2 } from "lucide-react";
-import Input from '@/components/Input';
 import Button from "@/components/Button";
+import Input from '@/components/Input';
 import axios from "axios";
+import { Building2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 
 
 const AuthPage = () => {
